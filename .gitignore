@@ -1,0 +1,52 @@
+# Workspace & cache directories
+go-workspace
+go-workspace/**
+go-workspace/*
+
+# Ignore compiled executables & distribution installer
+DevEnvManager.exe
+V-PreCode-Installer.exe
+
+# Ignore downloaded tool binaries (keep folder structure via .gitkeep)
+/composer/*
+!/composer/.gitkeep
+
+/go/*
+!/go/.gitkeep
+
+/mailpit/*
+!/mailpit/.gitkeep
+
+/mariadb/*
+!/mariadb/.gitkeep
+
+/node/*
+!/node/.gitkeep
+
+/php/*
+!/php/.gitkeep
+
+/phpmyadmin/*
+!/phpmyadmin/.gitkeep
+
+# Ignore database data & dynamic logs
+/mariadb/data/*
+
+# Temporary build & setup files
+*.tmp
+*.log
+*.sys
+createshortcut.vbs
+DevEnvManager.exe~
+sfx_config.txt
+
+# OS generated files
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.stackdump
+
+# IDE, Editor & Workspace metadata
+.idea/
+.vscode/
+.gemini/

@@ -1,0 +1,462 @@
+/* ==========================================================================
+   DevEnv Manager Design System & CSS Component Tokens
+   Author: Antigravity Team
+   Style: Modern Minimalist Dark Theme (Component-Oriented, No Hardcoded Colors)
+   ========================================================================== */
+
+:root {
+    /* Color Palette Design Tokens */
+    --bg-app: #0f172a;
+    --bg-surface: #1e293b;
+    --bg-surface-hover: #334155;
+    --bg-surface-active: #475569;
+    
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color-hover: rgba(255, 255, 255, 0.18);
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-tertiary: #64748b;
+
+    --color-accent: #38bdf8;
+    --color-accent-bg: rgba(56, 189, 248, 0.12);
+    --color-accent-glow: rgba(56, 189, 248, 0.25);
+
+    --color-success: #10b981;
+    --color-success-bg: rgba(16, 185, 129, 0.15);
+    --color-success-glow: rgba(16, 185, 129, 0.35);
+
+    --color-warning: #f59e0b;
+    --color-warning-bg: rgba(245, 158, 11, 0.15);
+    --color-warning-glow: rgba(245, 158, 11, 0.35);
+
+    --color-danger: #f43f5e;
+    --color-danger-bg: rgba(244, 63, 94, 0.15);
+    --color-danger-glow: rgba(244, 63, 94, 0.35);
+
+    /* Border Radius & Shadow Tokens */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-pill: 9999px;
+
+    --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    /* Transition Micro-Animations */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base Setup */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+}
+
+/* Main Container Layout */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 6px;
+}
+
+/* Header Toolbar Component */
+.header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 6px 10px;
+}
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-logo {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+}
+
+.brand-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+}
+
+/* Action Button Components */
+.icon-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-tool {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 26px;
+    padding: 0 8px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.btn-tool svg {
+    width: 13px;
+    height: 13px;
+}
+
+.btn-tool:hover:not(:disabled) {
+    background: var(--bg-surface-hover);
+    color: var(--text-primary);
+    border-color: var(--border-color-hover);
+}
+
+.btn-tool:active:not(:disabled) {
+    background: var(--bg-surface-active);
+    transform: scale(0.96);
+}
+
+/* Services Component Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    flex: 1;
+}
+
+/* Service Card Component */
+.service-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.service-card:hover {
+    border-color: var(--border-color-hover);
+}
+
+.service-card.running {
+    border-color: var(--color-success-bg);
+}
+
+.service-card.transitioning {
+    border-color: var(--color-warning-bg);
+}
+
+.service-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.service-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.service-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--text-secondary);
+}
+
+.service-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Status Badge Component */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-tertiary);
+    transition: all var(--transition-fast);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    transition: all var(--transition-fast);
+}
+
+/* Status Variations */
+.status-badge.stopped {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-tertiary);
+}
+.status-badge.stopped .status-dot {
+    background: var(--text-tertiary);
+}
+
+.status-badge.starting,
+.status-badge.stopping {
+    background: var(--color-warning-bg);
+    color: var(--color-warning);
+}
+.status-badge.starting .status-dot,
+.status-badge.stopping .status-dot {
+    background: var(--color-warning);
+    animation: pulse-dot 1s infinite alternate;
+}
+
+.status-badge.running {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+}
+.status-badge.running .status-dot {
+    background: var(--color-success);
+    box-shadow: 0 0 6px var(--color-success-glow);
+}
+
+@keyframes pulse-dot {
+    0% { opacity: 0.3; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Service Actions Toolbar inside Card */
+.service-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+}
+
+/* Primary Service Toggle Button */
+.btn-toggle {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 28px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    background: var(--bg-surface-hover);
+    color: var(--text-primary);
+    transition: all var(--transition-fast);
+}
+
+.btn-toggle:hover:not(:disabled) {
+    border-color: var(--border-color-hover);
+}
+
+.btn-toggle.action-start {
+    background: var(--color-success-bg);
+    color: var(--color-success);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+.btn-toggle.action-start:hover:not(:disabled) {
+    background: rgba(16, 185, 129, 0.25);
+    box-shadow: 0 0 8px var(--color-success-glow);
+}
+
+.btn-toggle.action-stop {
+    background: var(--color-danger-bg);
+    color: var(--color-danger);
+    border-color: rgba(244, 63, 94, 0.3);
+}
+.btn-toggle.action-stop:hover:not(:disabled) {
+    background: rgba(244, 63, 94, 0.25);
+    box-shadow: 0 0 8px var(--color-danger-glow);
+}
+
+.btn-toggle:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* External Link Action Button */
+.btn-external {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--bg-surface-hover);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-external:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    background: var(--color-accent-bg);
+}
+
+.btn-external.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Spinner Animation Component */
+.spinner {
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Bottom Environment Footer Component */
+.footer-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 4px 10px;
+}
+
+.env-pills-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.env-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: help;
+}
+
+.env-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--text-tertiary);
+    transition: all var(--transition-fast);
+}
+
+.env-dot.active {
+    background: var(--color-success);
+    box-shadow: 0 0 5px var(--color-success-glow);
+}
+
+.env-dot.inactive {
+    background: var(--color-danger);
+}
+
+/* Tooltip System Component */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #090d16;
+    color: #f8fafc;
+    border: 1px solid var(--border-color-hover);
+    padding: 3px 7px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
+    font-weight: 500;
+    white-space: nowrap;
+    z-index: 100;
+    pointer-events: none;
+    box-shadow: var(--shadow-subtle);
+}
+
+/* Toast System Component */
+#toast-container {
+    position: fixed;
+    bottom: 8px;
+    right: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    z-index: 999;
+    pointer-events: none;
+}
+
+.toast {
+    background: #090d16;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 500;
+    box-shadow: var(--shadow-subtle);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: toast-in 0.2s ease-out;
+}
+
+.toast.success {
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.toast.error {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
