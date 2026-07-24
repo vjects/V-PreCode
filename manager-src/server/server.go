@@ -36,6 +36,8 @@ func StartServer(rootDir string, port string, uiFS fs.FS) {
 	http.HandleFunc("/api/mailpit/stop", handleStopMailpit)
 	http.HandleFunc("/api/pma/start", handleStartPMA)
 	http.HandleFunc("/api/pma/stop", handleStopPMA)
+	http.HandleFunc("/api/redis/start", handleStartRedis)
+	http.HandleFunc("/api/redis/stop", handleStopRedis)
 	http.HandleFunc("/api/phpini/view", handleViewPHPIni)
 	http.HandleFunc("/api/winnat/reset", handleWinnatReset)
 	http.HandleFunc("/api/path/fix", handlePathFix)
@@ -125,6 +127,24 @@ func handleStopPMA(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	respondJSON(w, true, "PHPMyAdmin Stopped")
+}
+
+func handleStartRedis(w http.ResponseWriter, r *http.Request) {
+	err := services.StartRedis(cfg.RootDir)
+	if err != nil {
+		respondJSON(w, false, err.Error())
+		return
+	}
+	respondJSON(w, true, "")
+}
+
+func handleStopRedis(w http.ResponseWriter, r *http.Request) {
+	err := services.StopRedis(cfg.RootDir)
+	if err != nil {
+		respondJSON(w, false, err.Error())
+		return
+	}
+	respondJSON(w, true, "Redis Stopped")
 }
 
 func handleViewPHPIni(w http.ResponseWriter, r *http.Request) {

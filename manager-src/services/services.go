@@ -17,11 +17,13 @@ var (
 	mariadbCmd    *exec.Cmd
 	phpMyAdminCmd *exec.Cmd
 	mailpitCmd    *exec.Cmd
+	redisCmd      *exec.Cmd
 
 	// Mutexes to prevent concurrent start/stop race conditions
 	mariaDbMutex sync.Mutex
 	pmaMutex     sync.Mutex
 	mailpitMutex sync.Mutex
+	redisMutex   sync.Mutex
 )
 
 // TIP: Checks if a TCP port is active on localhost (127.0.0.1)
@@ -68,6 +70,7 @@ func GetServicesStatus() map[string]bool {
 		"mariadb": isPortOpen("3306"),
 		"mailpit": isPortOpen("8025"),
 		"pma":     isPortOpen("8080"),
+		"redis":   isPortOpen("6379"),
 	}
 }
 
@@ -324,11 +327,79 @@ func StopMailpit() error {
 	return nil
 }
 
+// TIP: Starts Redis cache/key-value store server and waits synchronously for TCP 6379 readiness
+func StartRedis(rootDir string) error {
+	redisMutex.Lock()
+	defer redisMutex.Unlock()
+
+	if isPortOpen("6379") {
+		return nil
+	}
+
+	killOrphanedProcess("redis-server.exe")
+	killProcessUsingPort("6379")
+	time.Sleep(300 * time.Millisecond)
+
+	exe := filepath.Join(rootDir, "redis", "redis-server.exe")
+	if _, err := os.Stat(exe); os.IsNotExist(err) {
+		return fmt.Errorf("redis-server.exe not found at %s", exe)
+	}
+
+	confFile := filepath.Join(rootDir, "redis", "redis.windows.conf")
+	if _, err := os.Stat(confFile); err == nil {
+		redisCmd = exec.Command(exe, confFile)
+	} else {
+		redisCmd = exec.Command(exe)
+	}
+
+	hideWindow(redisCmd)
+	err := redisCmd.Start()
+	if err != nil {
+		return fmt.Errorf("failed to start Redis server: %v", err)
+	}
+
+	if !waitForPortOpen("6379", 5) {
+		if redisCmd != nil && redisCmd.Process != nil {
+			_ = redisCmd.Process.Kill()
+		}
+		return fmt.Errorf("Redis server failed to bind to port 6379 within timeout")
+	}
+
+	return nil
+}
+
+// TIP: Gracefully shuts down Redis server using redis-cli shutdown or fallback process kill
+func StopRedis(rootDir string) error {
+	redisMutex.Lock()
+	defer redisMutex.Unlock()
+
+	if !isPortOpen("6379") {
+		return nil
+	}
+
+	cliExe := filepath.Join(rootDir, "redis", "redis-cli.exe")
+	if _, err := os.Stat(cliExe); err == nil {
+		shutdownCmd := exec.Command(cliExe, "shutdown")
+		hideWindow(shutdownCmd)
+		_ = shutdownCmd.Run()
+	}
+
+	if !waitForPortClose("6379", 3) {
+		killOrphanedProcess("redis-server.exe")
+		killProcessUsingPort("6379")
+		waitForPortClose("6379", 2)
+	}
+
+	redisCmd = nil
+	return nil
+}
+
 // StopAll cleans up all sub-services when DevEnvManager shuts down
 func StopAll(rootDir string) {
 	_ = StopMariaDB(rootDir)
 	_ = StopPHPMyAdmin()
 	_ = StopMailpit()
+	_ = StopRedis(rootDir)
 }
 
 // ViewPHPIni ensures php.ini exists and opens it in Notepad for easy configuration

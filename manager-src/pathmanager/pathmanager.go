@@ -20,6 +20,8 @@ var toolsToOverride = []string{
 	"composer.phar",
 	"mysql.exe",
 	"mysqld.exe",
+	"redis-server.exe",
+	"redis-cli.exe",
 }
 
 func containsTargetExecutable(dir string) bool {
@@ -63,6 +65,7 @@ func CleanAndInjectPath(rootDir string) error {
 		filepath.Join(rootDir, "go", "go", "bin"),
 		filepath.Join(rootDir, "composer"),
 		filepath.Join(rootDir, "mariadb", "bin"),
+		filepath.Join(rootDir, "redis"),
 	}
 
 	// Read User PATH instead of System PATH to avoid needing Administrator privileges

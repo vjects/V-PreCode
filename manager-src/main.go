@@ -87,7 +87,7 @@ func main() {
 		for _, p := range paths {
 			if _, err := os.Stat(p); err == nil {
 				// Run browser directly with dedicated profile and app ID for taskbar identity
-				exec.Command(p, "--app="+url, "--app-id=VPreCode", "--window-size=760,195", "--user-data-dir="+profileDir).Start()
+				exec.Command(p, "--app="+url, "--app-id=VPreCode", "--window-size=940,195", "--user-data-dir="+profileDir).Start()
 				launched = true
 				break
 			}

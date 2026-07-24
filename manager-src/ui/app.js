@@ -7,6 +7,7 @@
 // Service State Store (State machine: 'stopped' | 'starting' | 'running' | 'stopping')
 const serviceStates = {
     mariadb: 'stopped',
+    redis: 'stopped',
     pma: 'stopped',
     mailpit: 'stopped'
 };
@@ -125,6 +126,7 @@ async function toggleService(serviceKey) {
 function capitalize(str) {
     if (str === 'pma') return 'phpMyAdmin';
     if (str === 'mariadb') return 'MariaDB';
+    if (str === 'redis') return 'Redis';
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
@@ -136,7 +138,7 @@ async function fetchServicesStatus() {
         if (data.success && data.data) {
             const status = data.data;
 
-            ['mariadb', 'mailpit', 'pma'].forEach(key => {
+            ['mariadb', 'redis', 'mailpit', 'pma'].forEach(key => {
                 // Ignore status updates if user just initiated a transition
                 if (serviceStates[key] !== 'starting' && serviceStates[key] !== 'stopping') {
                     const isRunning = Boolean(status[key]);
@@ -209,6 +211,7 @@ async function executeQuickTool(endpoint, successMessage, btnElement) {
 window.addEventListener('load', () => {
     // Bind service toggle buttons
     document.getElementById('btn-mariadb-toggle')?.addEventListener('click', () => toggleService('mariadb'));
+    document.getElementById('btn-redis-toggle')?.addEventListener('click', () => toggleService('redis'));
     document.getElementById('btn-pma-toggle')?.addEventListener('click', () => toggleService('pma'));
     document.getElementById('btn-mailpit-toggle')?.addEventListener('click', () => toggleService('mailpit'));
 

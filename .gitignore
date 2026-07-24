@@ -1,7 +1,5 @@
 # Workspace & cache directories
-go-workspace
-go-workspace/**
-go-workspace/*
+/go-workspace/
 
 # Ignore compiled executables & distribution installer
 DevEnvManager.exe
@@ -11,7 +9,14 @@ V-PreCode-Installer.exe
 /composer/*
 !/composer/.gitkeep
 
-/go/*
+/go/bin/*
+/go/doc/*
+/go/include/*
+/go/lib/*
+/go/misc/*
+/go/pkg/*
+/go/src/*
+/go/test/*
 !/go/.gitkeep
 
 /mailpit/*
@@ -22,6 +27,9 @@ V-PreCode-Installer.exe
 
 /node/*
 !/node/.gitkeep
+
+/redis/*
+!/redis/.gitkeep
 
 /php/*
 !/php/.gitkeep
@@ -36,6 +44,8 @@ V-PreCode-Installer.exe
 *.tmp
 *.log
 *.sys
+*.rdb
+dump.rdb
 createshortcut.vbs
 DevEnvManager.exe~
 sfx_config.txt
