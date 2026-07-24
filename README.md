@@ -42,7 +42,7 @@
 ## 📸 Interface Preview
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="V-PreCode macOS Liquid Glass Interface" width="860">
+  <img src="docs/Screenshot-V3.png" alt="V-PreCode macOS Liquid Glass Interface" width="860">
 </p>
 
 ---
