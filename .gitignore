@@ -1,0 +1,24 @@
+# ==========================================================================
+# V-PreCode Git Ignore Configuration
+# ==========================================================================
+
+# 1. Compiled Executables & Binaries
+DevEnvManager.exe
+*.exe
+
+# 2. System & OS Temporary Files
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+*.vbs
+*.log
+
+# 3. Extracted Runtime Targets (Auto-generated on setup.bat execution)
+runtimes/*
+!runtimes/.gitkeep
+
+# 4. Heavy Vendor Binary Zip Archives in Assets
+assets/**/*.zip
+assets/**/*.exe
+!assets/**/.gitkeep

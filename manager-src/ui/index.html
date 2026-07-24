@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-PreCode</title>
+    <meta name="theme-color" content="#0a0e17">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/webp" href="logo.webp">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="logo.webp">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        
+        <!-- macOS Liquid Glass Header Bar Component -->
+        <header class="header-bar liquid-glass">
+            <div class="header-left">
+                <div class="brand-section">
+                    <img src="logo.webp" class="brand-logo" alt="V-PreCode">
+                    <span class="brand-title">V-PreCode</span>
+                    <span class="brand-version">v3.0</span>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <div class="icon-btn-group">
+                    <button class="btn-tool liquid-glass" id="btn-reinject" data-tooltip="Re-Inject System PATH">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                        <span>PATH Fix</span>
+                    </button>
+                    <button class="btn-tool liquid-glass" id="btn-phpini" data-tooltip="Edit php.ini Configuration">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                        <span>php.ini</span>
+                    </button>
+                    <button class="btn-tool liquid-glass" id="btn-winnat" data-tooltip="Reset WINNAT Network Adapter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <span>WINNAT Reset</span>
+                    </button>
+                </div>
+
+                <!-- macOS Liquid Theme Switcher Button -->
+                <button class="theme-toggle-btn liquid-glass" id="btn-theme-toggle" data-tooltip="Toggle Dark / Light Theme">
+                    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Services Cards Grid Component -->
+        <main class="services-grid">
+            
+            <!-- MariaDB Database Service Card -->
+            <div class="service-card liquid-glass" id="card-mariadb">
+                <div class="service-header">
+                    <div class="service-info">
+                        <div class="icon-wrapper mariadb">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+                        </div>
+                        <span class="service-title">MariaDB</span>
+                    </div>
+                    <div class="status-badge stopped" id="badge-mariadb">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Stopped</span>
+                    </div>
+                </div>
+                <div class="service-actions">
+                    <button class="btn-toggle liquid-glass action-start" id="btn-mariadb-toggle">
+                        <span>Start</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Redis Cache Service Card -->
+            <div class="service-card liquid-glass" id="card-redis">
+                <div class="service-header">
+                    <div class="service-info">
+                        <div class="icon-wrapper redis">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                        </div>
+                        <span class="service-title">Redis</span>
+                    </div>
+                    <div class="status-badge stopped" id="badge-redis">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Stopped</span>
+                    </div>
+                </div>
+                <div class="service-actions">
+                    <button class="btn-toggle liquid-glass action-start" id="btn-redis-toggle">
+                        <span>Start</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- phpMyAdmin Service Card -->
+            <div class="service-card liquid-glass" id="card-pma">
+                <div class="service-header">
+                    <div class="service-info">
+                        <div class="icon-wrapper pma">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h10"/></svg>
+                        </div>
+                        <span class="service-title">phpMyAdmin</span>
+                    </div>
+                    <div class="status-badge stopped" id="badge-pma">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Stopped</span>
+                    </div>
+                </div>
+                <div class="service-actions">
+                    <button class="btn-toggle liquid-glass action-start" id="btn-pma-toggle">
+                        <span>Start</span>
+                    </button>
+                    <a href="http://127.0.0.1:8080" target="_blank" class="btn-external liquid-glass disabled" id="btn-pma-open" data-tooltip="Open phpMyAdmin (8080)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mailpit SMTP & Mail Service Card -->
+            <div class="service-card liquid-glass" id="card-mailpit">
+                <div class="service-header">
+                    <div class="service-info">
+                        <div class="icon-wrapper mailpit">
+                            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <span class="service-title">Mailpit</span>
+                    </div>
+                    <div class="status-badge stopped" id="badge-mailpit">
+                        <span class="status-dot"></span>
+                        <span class="status-text">Stopped</span>
+                    </div>
+                </div>
+                <div class="service-actions">
+                    <button class="btn-toggle liquid-glass action-start" id="btn-mailpit-toggle">
+                        <span>Start</span>
+                    </button>
+                    <a href="http://127.0.0.1:8025" target="_blank" class="btn-external liquid-glass disabled" id="btn-mailpit-open" data-tooltip="Open Mailpit (8025)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer Environment Pills Component -->
+        <footer class="footer-bar liquid-glass">
+            <div class="env-pills-container">
+                <div class="env-pill liquid-glass" id="pill-php" data-tooltip="Checking PHP..."><div class="env-dot" id="dot-php"></div><span>PHP</span></div>
+                <div class="env-pill liquid-glass" id="pill-node" data-tooltip="Checking Node..."><div class="env-dot" id="dot-node"></div><span>Node</span></div>
+                <div class="env-pill liquid-glass" id="pill-go" data-tooltip="Checking Go..."><div class="env-dot" id="dot-go"></div><span>Go</span></div>
+                <div class="env-pill liquid-glass" id="pill-composer" data-tooltip="Checking Composer..."><div class="env-dot" id="dot-composer"></div><span>Composer</span></div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
