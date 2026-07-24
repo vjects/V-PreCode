@@ -23,7 +23,7 @@
 ## 📸 Interface Preview
 
 <p align="center">
-  <img src="screenshot.png" alt="V-PreCode Interface Preview" width="760">
+  <img src="screenshot-v2.png" alt="V-PreCode Interface Preview" width="760">
 </p>
 
 ---
